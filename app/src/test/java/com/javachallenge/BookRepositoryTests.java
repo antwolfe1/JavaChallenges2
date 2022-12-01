@@ -7,19 +7,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.sql.Connection;
+import java.util.List;
 
-public class JdbcTests {
+public class BookRepositoryTests {
     @Test
-    public void JdbcGetConnection() {
-        Connection actual = Jdbc.getConnection();
-        Assert.assertNotNull(actual);
+    public void test_getAllBooks() {
+        List<Book> expected = null;
+        List<Book> actual = BookRepository.getInstance().getAllBooks();
+        Assert.assertEquals(expected, actual);
     }
-
-    @Test
-    public void JdbcParseDbIntoBookObject() {
-        Book expected = new Book();
-        Book actual = Jdbc.parseIntoBook();
-        Assert.assertEquals(expected.getClass(), actual.getClass());
-    }
-
 }
