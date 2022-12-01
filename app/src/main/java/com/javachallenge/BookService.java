@@ -1,19 +1,21 @@
 package com.javachallenge;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DbChallenges {
 
 
-    public static void BookToCollection(String collectionType) {
-        Book book = Jdbc.parseIntoBook();
+    public static Serializable BookToCollection(String collectionType) {
+        Book book = BookRepository.getAllBooks();
         if (collectionType.equalsIgnoreCase("map")) {
-            BookToHashmap(book);
+            return BookToHashmap(book);
         }
         if (collectionType.equalsIgnoreCase("arraylist")) {
-            BookToArraylist(book);
+            return BookToArraylist(book);
         }
+        return null;
     }
 
     private static ArrayList<Book> BookToArraylist(Book book) {
