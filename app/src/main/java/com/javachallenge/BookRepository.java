@@ -1,29 +1,35 @@
 package com.javachallenge;
 
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
-public class Jdbc {
+public class BookRepository {
 
-    public static Connection getConnection() {
+    private final Connection connection;
 
-        Connection connection = null;
 
+    private BookRepository() {
         try {
             connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/bookdb", "user", "");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        return connection;
     }
 
-    public Jdbc() {}
+    public static BookRepository getInstance() {
+        return new BookRepository();
+    }
 
-    public static Book parseIntoBook() {
+
+    public List<Book> getAllBooks() {
         Book book = null;
         Statement statement;
         ResultSet resultSet;
-        Connection connection = getConnection();
+        List<Book> bookList = new ArrayList<>();
 
         try {
             statement = connection.createStatement();
@@ -35,14 +41,15 @@ public class Jdbc {
                 int pages = resultSet.getInt("pages");
                 float price = resultSet.getFloat("price");
                 book = new Book(id, title, author, pages, price);
+                bookList.add(book);
 
                 // need to stop the loop before it runs entire DB
-                return book;
+                return bookList;
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return book;
+        return null;
     }
 
 
