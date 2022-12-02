@@ -13,7 +13,7 @@ public class BookRepository {
 
     private BookRepository() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/bookdb", "user", "");
+            connection = DriverManager.getConnection("URL", "user", "");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
