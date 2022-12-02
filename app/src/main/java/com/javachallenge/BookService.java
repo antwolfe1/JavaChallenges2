@@ -1,6 +1,5 @@
 package com.javachallenge;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,16 +22,21 @@ public class BookService {
 
     public static List<Book> getAllBooks() {
         List<Book> allBooks = BookRepository.getInstance().getAllBooks();
+        System.out.println(allBooks);
         return allBooks;
     }
 
-    private static ArrayList<Book> BookToArraylist(Book book) {
-        ArrayList<Book> arrayList = new ArrayList<>();
-        arrayList.add(book);
-        return arrayList;
+    public static List<Book> getAllBooksAsList() {
+        ArrayList<Book> allBooks = new ArrayList<>();
+        List<Book> bookRepoReturns = BookRepository.getInstance().getAllBooks();
+        for (Book book : bookRepoReturns) {
+            allBooks.add(book);
+        }
+        return allBooks;
     }
 
-    private static HashMap<Integer, Book> BookToHashmap(Book book) {
+
+    public static HashMap<Integer, Book> getAllBooksAsMap(Book book) {
         HashMap<Integer, Book> map = new HashMap<>();
         int id = book.getId();
         map.put(id, book);

@@ -10,6 +10,9 @@ public class BookRepository {
 
     private final Connection connection;
 
+    public static BookRepository getInstance() {
+        return new BookRepository();
+    }
 
     private BookRepository() {
         try {
@@ -19,11 +22,6 @@ public class BookRepository {
         }
 
     }
-
-    public static BookRepository getInstance() {
-        return new BookRepository();
-    }
-
 
     public List<Book> getAllBooks() {
         Book book = null;
@@ -42,15 +40,11 @@ public class BookRepository {
                 float price = resultSet.getFloat("price");
                 book = new Book(id, title, author, pages, price);
                 bookList.add(book);
-
-                // need to stop the loop before it runs entire DB
-                return bookList;
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return null;
+        return bookList;
     }
-
 
 }

@@ -6,14 +6,18 @@ package com.javachallenge;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.sql.Connection;
 import java.util.List;
 
 public class BookRepositoryTests {
+
     @Test
-    public void test_getAllBooks() {
-        List<Book> expected = null;
+    public void test_getAllBooks_returnsSameCountAsTable() {
+        int expected = 5;
         List<Book> actual = BookRepository.getInstance().getAllBooks();
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals("should return 5 for both lists", expected, actual.size());
     }
+
+
+
+
 }
